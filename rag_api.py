@@ -47,8 +47,8 @@ CACHE_VECTOR_DB_PATH = os.getenv("CACHE_VECTOR_DB_PATH", "vector_db_cache.pkl")
 # แหล่งข้อมูล PDF
 PDF_PATHS = ["solar_pdf", "."]
 
-# embedding model - ดีกว่า MiniLM สำหรับภาษาไทย
-EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+# embedding model - ดีกว่า MiniLM สำหรับภาษาไทย — กำหนดเป็น env var ได้เพื่อสับเปลี่ยนเป็นโมเดลเล็กกว่า (เช่น MiniLM-L12-v2 ~470MB) บนเซิร์ฟเวอร์ RAM จำกัดโดยไม่กระทบ dev เครื่องนี้
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
 
 # ============================================================================
 # ตั้งค่า FastAPI

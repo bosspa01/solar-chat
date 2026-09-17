@@ -1,0 +1,30 @@
+# ไม่ copy อะไรพวกนี้เข้า Docker image ของ backend (ลด build context + ไม่เอาข้อมูลเก่า/secrets ติดไปด้วย)
+.venv
+.venv-1
+node_modules
+dist
+dist-ssr
+__pycache__
+*.pyc
+
+# ไม่เอาไฟล์ .env จริงเข้า image - ตั้งค่า env var ผ่าน dashboard ของ hosting platform เอง
+.env
+.env.*
+
+# ข้อมูลผู้ใช้/แคชของเครื่อง dev - ให้ container สร้างใหม่เอง หรือมาจาก persistent volume
+app.db
+chunks_cache.pkl
+vector_db_cache.pkl
+vector_db_cache/
+
+.git
+.gitignore
+.claude
+src
+public
+index.html
+package.json
+package-lock.json
+vite.config.js
+eslint.config.js
+README.md

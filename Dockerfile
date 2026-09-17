@@ -24,6 +24,11 @@ COPY rag_api.py auth_db.py ./
 COPY solar_pdf ./solar_pdf
 COPY Sarabun-Regular.ttf ./
 
+# ฝัง cache ที่สร้างไว้ล่วงหน้า (ด้วย build_deploy_cache.py บนเครื่อง dev) เข้า image โดยตรง
+# เพื่อหลีกเลี่ยงการคำนวณ embedding ตอน container เริ่มทำงาน (ช้า/เสี่ยง OOM บนเครื่อง RAM จำกัด)
+COPY deploy_chunks_cache.pkl ./chunks_cache.pkl
+COPY deploy_vector_db_cache.pkl ./vector_db_cache.pkl
+
 ENV PYTHONUNBUFFERED=1
 
 # Railway/Render จะฉีด env var PORT มาให้ตอน runtime - bind 0.0.0.0 เสมอสำหรับ container

@@ -25,6 +25,10 @@ vector_db_cache.pkl
 vector_db_cache/
 .env
 
+# cache ที่ build_deploy_cache.py สร้างไว้ฝัง Docker image - ไฟล์ใหญ่เกิน 100MB ของ GitHub จงไม่ commit (deploy ด้วย `railway up` จากเครื่องนี้โดยตรงแทน)
+deploy_chunks_cache.pkl
+deploy_vector_db_cache.pkl
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

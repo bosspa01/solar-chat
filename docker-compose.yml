@@ -1,0 +1,21 @@
+# สำหรับ self-host บน VPS/Oracle Cloud VM ของตัวเอง (ทางเลือกฟรีจริง)
+# รัน: docker compose up -d --build
+# แล้วตั้ง reverse proxy (nginx/caddy) ชี้มาที่ backend :8000 และ serve ไฟล์ build ของ frontend (npm run build -> dist/) แยกกัน
+
+services:
+  backend:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - AUTH_DB_PATH=/data/app.db
+      - CACHE_CHUNKS_PATH=/data/chunks_cache.pkl
+      - CACHE_VECTOR_DB_PATH=/data/vector_db_cache.pkl
+    volumes:
+      - solar_data:/data
+
+volumes:
+  solar_data:

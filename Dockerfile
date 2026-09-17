@@ -12,6 +12,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # copy requirements ก่อนเพื่อให้ Docker cache layer นี้ไว้ (ไม่ต้อง pip install ใหม่ทุกครั้งที่โค้ดเปลี่ยน)
 COPY requirements.txt .
+
+# ติดตั้ง PyTorch แบบ CPU-only ก่อน (รันบน CPU เท่านั้น ไม่มี GPU) - ถ้าไม่ทำแบบนี้ pip จะดึงแพ็กเกจ CUDA/GPU
+# มาด้วยหลาย GB โดยไม่จำเป็น ทำให้ image ใหญ่และ build ช้ามาก
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # copy โค้ด backend และ PDF ที่ใช้ทำ RAG (ไม่ copy node_modules/.venv/ฯลฯ - ดู .dockerignore)
